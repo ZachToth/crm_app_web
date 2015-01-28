@@ -1,1 +1,21 @@
-layout.erb
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+	<title>Document</title>
+</head>
+<body>
+<header>
+<h1> Welcome to <%= @crm_app_name %></h1>
+ <nav>
+ <ul>
+    <li><a href="/contacts"> View all contacts</a></li>
+    <li><a href="/contacts/new_contact"> Add a contact</a></li>
+    </ul>
+  </nav>
+</header>
+<%= yield %>
+<footer><h1>Copyright Zachary Toth &copy;</h1></footer>
+</body>
+</html>

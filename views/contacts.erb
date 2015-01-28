@@ -8,9 +8,11 @@
 	<h1> All Contacts </h1>
 	<ul>
 	<% $rolodex.contacts.each do |contact| %>
-		<li><%= contact.first_name %> <%= contact.last_name %></li>
-		<% end %>
-		</ul>
+		<li><a href="/contacts/<%= contact.id %>"><%= contact.first_name %> <%= contact.last_name %></a>
+		<p> <%= contact.to_s %> </p>
+		</li>
+	<% end %>
+	</ul>
 
 </body>
 </html>
