@@ -5,11 +5,10 @@
 	<title>All contacts</title>
 </head>
 <body>
-	<h1> All Contacts </h1>
+	<h3> All Contacts </h3>
 	<ul>
 	<% $rolodex.contacts.each do |contact| %>
-		<li><a href="/contacts/<%= contact.id %>"><%= contact.first_name %> <%= contact.last_name %></a>
-		<p> <%= contact.to_s %> </p>
+		<li class="contact"><a class="contactlink" href="/contacts/<%= contact.id %>"><%= contact.first_name %> <%= contact.last_name %></a>
 		</li>
 	<% end %>
 	</ul>

@@ -8,14 +8,16 @@
 <body>
 <header>
 <h1> Welcome to <%= @crm_app_name %></h1>
- <nav>
- <ul>
-    <li><a href="/contacts"> View all contacts</a></li>
-    <li><a href="/contacts/new_contact"> Add a contact</a></li>
+  <nav>
+    <ul>
+      <li><a href="/contacts"> View all contacts</a></li>
+      <li><a href="/contacts/new_contact"> Add a contact</a></li>
+      <li><a href=" ">Deleted a contact</a></li>
+       <li><a href=" ">Modify a contact</a></li>
     </ul>
   </nav>
 </header>
-<%= yield %>
-<footer><h1>Copyright Zachary Toth &copy;</h1></footer>
+<div><%= yield %></div>
+<footer><h1>Copyright Zachary Toth</h1></footer>
 </body>
 </html>
