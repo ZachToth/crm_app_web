@@ -43,6 +43,7 @@ end
 
 get '/contacts' do
 	@crm_page_name = "All Contacts"
+  @contacts = Contact.all
 	erb :contacts
 end
 
@@ -89,8 +90,12 @@ end
 
 #posts
 post '/contacts' do
-	new_contact = Contact.new(params[:first_name], params[:last_name], params[:email], params[:note])
-	$rolodex.add_contact(new_contact)
+	 contact = Contact.create(
+    :first_name => params[:first_name],
+    :last_name => params[:last_name],
+    :email => params[:email],
+    :note => params[:note]
+  )
 	redirect to('/contacts')
 end
 
