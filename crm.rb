@@ -53,7 +53,7 @@ get '/contacts/new_contact' do
 end
 
 get '/contacts/:id' do
-	@contact = $rolodex.get_contact(params[:id].to_i)
+	  @contact = Contact.get(params[:id].to_i)
 	@crm_page_name = @contact.first_name
 	# binding.pry
 	if @contact
