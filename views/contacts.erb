@@ -2,15 +2,30 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>All contacts</title>
 </head>
 <body>
 	<h3> All Contacts </h3>
 	<ul>
 	<% $rolodex.contacts.each do |contact| %>
-		<li class="contact"><a class="contactlink" href="/contacts/<%= contact.id %>"><%= contact.first_name %> <%= contact.last_name %></a>
-		</li>
-	<% end %>
+    <table>
+  		  <tr>
+          <li class="contact">
+            <td><a class="contactlink" href="/contacts/<%= contact.id %>"><%= contact.first_name %></a>
+            </td>
+            <td><a class="contactlink" href="/contacts/<%= contact.id %>"> <%= contact.last_name %> </a>
+            </td>
+            <td><a class="edit"> Edit </a>
+            </td>
+            <td><a class="delete"> <form action="/contacts/<%= contact.id %>" method="post">
+                                      <input type="hidden" name="_method" value="delete">
+                                      <input type="submit" name="Delete Contact">
+                                    </form>
+                </a>
+            </td>
+  		    </li>
+        </tr>
+      </table>
+  	<% end %>
 	</ul>
 
 </body>

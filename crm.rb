@@ -1,28 +1,59 @@
 require 'sinatra'
-require_relative 'contact'
 require_relative 'rolodex'
-require "pry"
+require 'pry'
+require 'data_mapper'
+
+DataMapper.setup(:default, "sqlite3:database.sqlite3")
+
+class Contact
+  include DataMapper::Resource
+    # attr_accessor :id, :first_name, :last_name, :email, :note
+
+    property :id, Serial
+    property :first_name, String
+    property :last_name, String
+    property :email, String
+    property :note, String 
+
+  # def initialize(first_name, last_name, email, note)
+  #   @id = id
+  #   @first_name = first_name
+  #   @last_name = last_name
+  #   @email = email
+  #   @note = note
+  # end
+
+  # def to_s
+  #   "\nId: #{@id}\nFirst Name: #{@first_name}\nLast Name: #{@last_name}\nEmail: #{@email}\nNote: #{@note}\n"
+  # end
+end
+
+DataMapper.finalize
+DataMapper.auto_upgrade!
 
 $rolodex= Rolodex.new
 
 #routes
 #gets
 get '/' do 
-	@crm_app_name = "My CRM"
+	@crm_page_name = "My CRM"
 	erb :index
 end
 
 
 get '/contacts' do
+	@crm_page_name = "All Contacts"
 	erb :contacts
 end
 
 get '/contacts/new_contact' do
+	@crm_page_name = "Add a New Contact"
 	erb :new_contact
 end
 
 get '/contacts/:id' do
 	@contact = $rolodex.get_contact(params[:id].to_i)
+	@crm_page_name = @contact.first_name
 	# binding.pry
 	if @contact
 		erb :show
@@ -33,6 +64,7 @@ end
 
 get '/contacts/:id/edit' do
 	@contact = $rolodex.get_contact(params[:id].to_i)
+	@crm_page_name = "Edit #{@contact.first_name}"
 	if @contact
 		erb :edit
 	else
@@ -64,9 +96,9 @@ end
 
 #deletes
 delete "/contacts/:id" do
-  @contact = $rolodex.get_contact(params[:id].to_i)
-  if @contact
-    $rolodex.remove_contact(@contact)
+  contact = $rolodex.get_contact(params[:id].to_i)
+  if contact
+    $rolodex.remove_contact(contact)
     redirect to("/contacts")
   else
     raise Sinatra::NotFound
